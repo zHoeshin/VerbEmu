@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<head>
+    <title>Verb Interpreter</title>
+    <script src="ace.js"></script>
+    <script src="vanilla-terminal.js"></script>
+    <script src="verb.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ace-builds@1.37.5/css/ace.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!--div id="editor">(comments are in parenthesis)
+
+define structure list:
+    where length is integer
+    where elements is ordered set
+    
+    with operation of getting element with integer argument i:
+        return i-th element of own elements
+    .
+    
+    with operation of setting element with integer argument i and untyped argument v:
+        put v into i-th element of own elements
+    .
+    
+    with operation of adding with untyped argument v:
+        put v into last element of own elements
+    .
+    
+    with operation of substracting:
+        let v be untyped
+        put last element of own elements into v
+        remove last element from own elements
+        return v
+    .
+    
+    with operation of getting member length:
+        return size of own elements
+    ..
+
+define procedure factorial with integer argument n:
+    if n is equal to 0, return 1
+    else, return product of n and result of procedure factorial with argument difference of n and 1
+.
+
+print result of procedure factorial eith argument 5 (120)
+
+let a be list
+add 5 to a
+add 7 to a
+add 1763 to a
+print 2-nd element of a (7)
+print length of a (3)
+
+difference of 5 and 2 (5-2)
+sum of 5 and 2
+product of 5 and 2
+quotient of 5 and 2
+remainder of division of 5 by 2
+whole part of division of 5 by 2
+power 5 of 2 (2⁵)
+element of object
+put quotient of power 2 of n and product of power x of e and sum of pi and power half of 2 into l (l=(2ⁿ)/[(e^x)(pi+sqrt(2))])
+put
+    quotient of
+        power 2 of n 
+    add
+        product of
+            power x of e
+        add
+            sum of
+                pi
+            add
+                power half of 2
+into
+    l
+    </div-->
+    <div id="editor">
+let a be numeric.
+take text input and put it into a.
+print a.
+(exit 0.)
+
+let a be numeric.
+let b be numeric.
+let c be numeric.
+put 5 into b.
+put 7 into a.
+put difference of a and b into c.
+print a.
+print b.
+print c.
+let half be numeric.
+put quotient of 1 and 2 into half.
+let r be numeric.
+let x be numeric.
+take numeric input and put it into x.
+put
+    quotient of
+        power 2 of n 
+    and
+        product of
+            power x of e
+        and
+            sum of
+                pi
+            and
+                power half of 2
+into
+    r
+.
+print r.
+exit 10.</div>
+
+    <!--script src="/ace-builds/src-noconflict/ace.js" type="text/javascript" charset="utf-8"></script-->
+    <script>
+        var editor = ace.edit("editor");
+        editor.setTheme("ace/theme/chaos");
+        editor.session.setMode("ace/mode/verb");
+    </script>
+
+    <div id="vanilla-terminal"></div>
+    <script>
+        const term = new VanillaTerminal({
+            welcome: "Use <code>&gt; run</code> to run the program",
+            commands: {
+            /*flavour: (terminal) => {
+                terminal.output('There is only one flavour for your favorite🍦and it is <b>vanilla<b>.')
+                terminal.setPrompt('@soyjavi <small>❤️</small> <u>vanilla</u> ');
+            },
+
+            async: (terminal) => {
+                terminal.idle();
+                setTimeout(() => terminal.output('Async 300'), 300);
+                setTimeout(() => terminal.output('Async 1300'), 1300);
+                setTimeout(() => {
+                terminal.output('Async 2000');
+                terminal.setPrompt();
+                }, 2000);
+            },
+
+            name: (term) => {
+                term.prompt('Your name', (name) => {
+                    term.output(`Your name: <b style="color: white;">${name}</b>`)
+                    term.output(`Hi ${name}!`);
+                    term.setPrompt(`${name} `);
+                })
+            },*/
+
+            run: (term) => {
+                /*term.output(`120`)
+                term.output(`7`)
+                term.output(`3`)
+                term.idle()
+                setTimeout(() => {term.setPrompt(">"); term.prompt('Async 1300', (r) => {term.setPrompt(">")})}, 1000);*/
+                VM.make()
+                VM.start()
+            },
+
+            version: (term) => {
+                term.output("Vanilla Terminal v0.0.11")
+                term.output("Verb")
+            }
+            },
+
+            // welcome: 'Welcome...',
+            // prompt: 'soyjavi at <u>Macbook-Pro</u> ',
+            separator: '>',
+        });
+
+        term.onInput((command, parameters) => {
+            console.log('⚡️onInput', command, parameters);
+        });
+        /*term.prompt('Your name', (name) => {
+            term.output(`Hi ${name}!`);
+            term.setPrompt(`${name} `);
+        });*/
+    </script>
+</body>
